@@ -1,0 +1,774 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,700&display=swap');
+
+/* Reset e base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Rubik', 'Inter', 'Nunito Sans', Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  /* Textura suave de fundo */
+  background: linear-gradient(135deg, #18181b 0%, #23232a 100%), url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%2318181b"/><circle cx="50" cy="50" r="1.5" fill="%2323232a"/><circle cx="80" cy="20" r="1" fill="%2323232a"/><circle cx="20" cy="80" r="1" fill="%2323232a"/></svg>');
+  background-size: cover, 120px 120px;
+  color: #fff;
+}
+body, html {
+  transition: background 0.5s cubic-bezier(.4,2,.6,1), color 0.5s cubic-bezier(.4,2,.6,1);
+}
+
+/* Scrollbar estilizada */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 12px;
+  background: #18181b;
+}
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #23232a 40%, #4b4bff 100%);
+  border-radius: 8px;
+  border: 2px solid #18181b;
+  transition: background 0.2s;
+}
+html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #4b4bff 0%, #23232a 100%);
+}
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+  background: #18181b;
+  border-radius: 8px;
+}
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #4b4bff #18181b;
+}
+
+/* Logo em fundo branco centralizado */
+.header {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 0 0 0;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+.logo-container {
+  /* Removido o círculo e padding extra */
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 12px;
+}
+.logo {
+  width: 240px;
+  max-width: 90vw;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1), filter 0.3s;
+}
+.logo.efeito-secreto {
+  animation: logoSecreta 1.2s cubic-bezier(.4,2,.6,1);
+}
+@keyframes logoSecreta {
+  0% { filter: brightness(1) drop-shadow(0 0 0 #4b4bff00); transform: scale(1) rotate(0deg); }
+  20% { filter: brightness(1.5) drop-shadow(0 0 24px #4b4bffcc); transform: scale(1.12) rotate(-8deg); }
+  50% { filter: brightness(2) drop-shadow(0 0 48px #4b4bff); transform: scale(1.18) rotate(8deg); }
+  80% { filter: brightness(1.5) drop-shadow(0 0 24px #4b4bffcc); transform: scale(1.12) rotate(-8deg); }
+  100% { filter: brightness(1) drop-shadow(0 0 0 #4b4bff00); transform: scale(1) rotate(0deg); }
+}
+@media (max-width: 600px) {
+  .logo {
+    width: 120px;
+  }
+}
+.logo:hover, .logo:focus {
+  transform: scale(1.07) rotate(-2deg);
+  filter: drop-shadow(0 0 16px #4b4bff88);
+}
+
+/* Menu minimalista no topo direito */
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  padding: 0 32px 0 0;
+}
+.menu a {
+  text-decoration: none;
+  color: #18181b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s, letter-spacing 0.2s;
+  outline: none;
+}
+.menu a.active, .menu a:focus, .menu a:hover {
+  color: #fff;
+  background: #23232a;
+  border-radius: 8px;
+  padding: 8px 18px;
+}
+.menu a:focus {
+  box-shadow: 0 0 0 2px #fff, 0 0 8px #4b4bff;
+}
+.menu a:hover, .menu a:focus, .menu a.active {
+  letter-spacing: 3px;
+  box-shadow: 0 2px 12px #4b4bff22;
+}
+
+/* Seções principais */
+.section {
+  max-width: 1100px;
+  margin: 64px auto 0 auto;
+  padding: 48px 36px;
+  background: #23232a;
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInSection 1.1s cubic-bezier(.4,2,.6,1);
+}
+@keyframes fadeInSection {
+  from { opacity: 0; transform: translateY(60px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-section h1 {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #fff;
+  margin-bottom: 18px;
+  text-align: center;
+  text-transform: uppercase;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  text-fill-color: initial !important;
+  color: #fff !important;
+  transition: none !important;
+}
+.home-section p {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  margin-top: 32px;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.1rem;
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #18181b;
+  border-radius: 18px;
+  padding: 24px 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  min-width: 140px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature span, .feature h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.feature h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.feature:hover, .feature:focus {
+  transform: translateY(-8px) scale(1.07);
+  box-shadow: 0 8px 32px rgba(255,255,255,0.08);
+}
+
+.projetos-section h2, .contato-section h2, .admin-section h2 {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  animation: fadeInTitle 1.2s cubic-bezier(.4,2,.6,1);
+  transition: text-shadow 0.3s;
+  text-shadow: 0 2px 24px #0008;
+}
+@keyframes fadeInTitle {
+  from { opacity: 0; letter-spacing: 24px; filter: blur(8px); }
+  to { opacity: 1; letter-spacing: 2px; filter: blur(0); }
+}
+
+.projetos-filtros {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+#filtro-busca {
+  background: #18181b;
+  color: #fff;
+  border: 1.5px solid #444;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 340px;
+  outline: none;
+  transition: border 0.2s;
+}
+#filtro-busca:focus {
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 2px #fff, 0 0 8px #4b4bff;
+}
+
+.projetos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  width: 100%;
+}
+.projetos-item {
+  background: #18181b;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18), 0 0 24px 0 #4b4bff11;
+  padding: 28px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+.projetos-item::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 60%, #4b4bff22 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.projetos-item:hover::after, .projetos-item:focus-within::after {
+  opacity: 1;
+}
+.projetos-item:hover, .projetos-item:focus-within {
+  box-shadow: 0 12px 48px rgba(75,75,255,0.18), 0 4px 16px rgba(0,0,0,0.25);
+  transform: translateY(-8px) scale(1.04);
+  background: linear-gradient(135deg, #1a1a22 0%, #23232a 100%);
+  border: 1px solid rgba(75,75,255,0.2);
+  transition: all 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+/* Modo Focus - Destaque especial */
+.projetos-item.focus-mode {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, #1a1a22 0%, #23232a 100%);
+  border: 2px solid #4b4bff;
+  box-shadow: 
+    0 16px 64px rgba(75,75,255,0.25),
+    0 8px 32px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(75,75,255,0.1);
+  transform: translateY(-12px) scale(1.06);
+  transition: all 0.5s cubic-bezier(.4,2,.6,1);
+}
+
+.projetos-item.focus-mode::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #4b4bff, #23232a, #4b4bff);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: focusGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes focusGlow {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.4; }
+}
+
+/* Zoom suave nas imagens no modo focus */
+.projetos-item.focus-mode .carrossel-img {
+  transform: scale(1.08);
+  transition: transform 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+/* Informações expandidas no modo focus */
+.projetos-item.focus-mode h4 {
+  font-size: 1.3rem;
+  color: #4b4bff;
+  text-shadow: 0 0 8px rgba(75,75,255,0.3);
+  transition: all 0.3s ease;
+}
+
+.projetos-item.focus-mode p {
+  font-size: 1.1rem;
+  color: #fff;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+}
+.projetos-item img {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.projetos-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+}
+.projetos-item p {
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  text-align: center;
+}
+.projetos-item button {
+  margin-top: 12px;
+  background: #23232a;
+  color: #fff;
+  border: 1.5px solid #fff;
+  border-radius: 8px;
+  padding: 8px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s, transform 0.18s;
+  box-shadow: 0 2px 8px rgba(75,75,255,0.08);
+}
+.projetos-item button:hover, .projetos-item button:focus {
+  background: #fff;
+  color: #18181b;
+  border: 1.5px solid #4b4bff;
+}
+button:hover, button:focus, .projetos-item button:hover, .projetos-item button:focus, #admin-login button:hover, #admin-login button:focus, #project-form button:hover, #project-form button:focus, .contato-form button:hover, .contato-form button:focus {
+  background: #4b4bff;
+  color: #fff;
+  box-shadow: 0 4px 24px #4b4bff44, 0 0 0 2px #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.contato-section {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+}
+.contato-info {
+  flex: 1;
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+}
+.contato-info p {
+  margin: 8px 0;
+  color: #e0e0e0;
+}
+
+/* Formulário de contato (exemplo visual) */
+.contato-form {
+  flex: 1;
+  background: #18181b;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contato-form input, .contato-form textarea {
+  background: #23232a;
+  color: #fff;
+  border: 1.5px solid #444;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.contato-form input:focus, .contato-form textarea:focus {
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 2px #fff, 0 0 8px #4b4bff;
+}
+input:focus, textarea:focus {
+  border: 1.5px solid #4b4bff;
+  box-shadow: 0 0 0 2px #4b4bff44;
+}
+.contato-form button {
+  background: #fff;
+  color: #18181b;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.contato-form button:hover, .contato-form button:focus {
+  background: #4b4bff;
+  color: #fff;
+}
+
+.admin-section {
+  text-align: center;
+  background: #23232a;
+}
+#admin-login input {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #444;
+  margin-right: 8px;
+  font-size: 1rem;
+  background: #18181b;
+  color: #fff;
+  outline: none;
+  transition: border 0.2s;
+}
+#admin-login input:focus {
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 2px #fff, 0 0 8px #4b4bff;
+}
+#admin-login button {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  color: #18181b;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+#admin-login button:hover, #admin-login button:focus {
+  background: #4b4bff;
+  color: #fff;
+}
+#admin-panel {
+  margin-top: 32px;
+}
+#project-form input, #project-form textarea {
+  display: block;
+  width: 90%;
+  margin: 12px auto;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid #444;
+  font-size: 1rem;
+  background: #18181b;
+  color: #fff;
+  outline: none;
+  transition: border 0.2s;
+}
+#project-form input:focus, #project-form textarea:focus {
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 2px #fff, 0 0 8px #4b4bff;
+}
+#project-form button {
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  color: #18181b;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+#project-form button:hover, #project-form button:focus {
+  background: #4b4bff;
+  color: #fff;
+}
+
+.footer {
+  text-align: center;
+  padding: 40px 0 24px 0;
+  color: #888;
+  font-size: 1.1rem;
+  background: none;
+  letter-spacing: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 1100px) {
+  .section {
+    max-width: 98vw;
+    padding: 32px 4vw;
+  }
+}
+@media (max-width: 800px) {
+  .section {
+    padding: 24px 2vw;
+    border-radius: 18px;
+  }
+  .features {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .contato-section {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    padding: 18px 0 0 0;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+  .logo {
+    width: 120px;
+  }
+  .menu ul {
+    gap: 12px;
+    padding: 0 8px 0 0;
+  }
+  .section {
+    margin: 24px 0 0 0;
+    padding: 12px 2vw;
+    border-radius: 10px;
+  }
+  .projetos-list {
+    gap: 16px;
+  }
+  .projetos-item {
+    min-height: 180px;
+    padding: 14px 6px 10px 6px;
+  }
+}
+
+/* Acessibilidade extra */
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+} 
+
+/* Títulos continuam com Poppins/Montserrat */
+.home-section h1, .projetos-section h2, .contato-section h2, .admin-section h2 {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+}
+
+.sobre-content p, .sobre-content ul, .sobre-content li, .projetos-item p, .contato-info p, .contato-form input, .contato-form textarea, .contato-form button, #project-form input, #project-form textarea, #project-form button, #admin-login input, #admin-login button {
+  font-family: 'Rubik', 'Inter', 'Nunito Sans', Arial, sans-serif;
+  font-size: 1.08rem;
+  letter-spacing: 0.2px;
+  color: #e0e0e0;
+  font-weight: 500;
+} 
+
+.projetos-item h4 {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+}
+
+.menu a, .feature, .feature h3 {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+}
+
+/* Ajuste para inputs e botões manterem contraste e legibilidade */
+input, textarea, button {
+  font-family: 'Rubik', 'Inter', 'Nunito Sans', Arial, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+} 
+
+.carrossel-imagens {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  height: 160px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.carrossel-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.fade-out {
+  opacity: 0;
+  transform: scale(0.97);
+}
+.carrossel-seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(36,36,60,0.85);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+  box-shadow: 0 2px 8px #4b4bff22;
+  opacity: 0.85;
+}
+.carrossel-seta-esq {
+  left: 6px;
+}
+.carrossel-seta-dir {
+  right: 6px;
+}
+.carrossel-seta:hover, .carrossel-seta:focus {
+  background: #4b4bff;
+  color: #fff;
+  box-shadow: 0 4px 16px #4b4bff44;
+  transform: scale(1.08);
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .carrossel-imagens, .carrossel-img {
+    max-width: 98vw;
+    height: 120px;
+  }
+} 
+
+body.light-mode .feature h3, body.light-mode .feature span {
+  color: #18181b;
+}
+body.light-mode .sobre-content p, body.light-mode .sobre-content ul, body.light-mode .sobre-content li {
+  color: #222;
+}
+body.light-mode .contato-info p, body.light-mode .contato-info a, body.light-mode .contato-info span {
+  color: #222 !important;
+}
+body.light-mode .footer {
+  background: none;
+  color: #444;
+}
+body.light-mode button, body.light-mode .projetos-item button, body.light-mode #admin-login button, body.light-mode #project-form button, body.light-mode .contato-form button {
+  background: #4b4bff;
+  color: #fff;
+  border: none;
+}
+body.light-mode button:hover, body.light-mode button:focus, body.light-mode .projetos-item button:hover, body.light-mode .projetos-item button:focus, body.light-mode #admin-login button:hover, body.light-mode #admin-login button:focus, body.light-mode #project-form button:hover, body.light-mode #project-form button:focus, body.light-mode .contato-form button:hover, body.light-mode .contato-form button:focus {
+  background: #23232a;
+  color: #fff;
+} 
+
+/* Remover glassmorphism, gradientes e sombras especiais */
+.projetos-item, .admin-section, .menu, .contato-form {
+  background: #18181b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  border-radius: 18px;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.projetos-item, .contato-form, .admin-section {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: box-shadow 0.22s cubic-bezier(.4,2,.6,1), transform 0.18s;
+}
+.projetos-item:hover, .contato-form:focus-within, .admin-section:focus-within {
+  box-shadow: 0 8px 32px rgba(75,75,255,0.13), 0 2px 8px rgba(0,0,0,0.18);
+  transform: translateY(-4px) scale(1.025);
+}
+.menu {
+  padding: 0;
+  margin-bottom: 8px;
+  box-shadow: none;
+  border-radius: 0;
+  background: none;
+}
+button, .projetos-item button, #admin-login button, #project-form button, .contato-form button {
+  background: linear-gradient(90deg, #4b4bff 0%, #23232a 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px #4b4bff22;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.18s;
+}
+button:hover, button:focus, .projetos-item button:hover, .projetos-item button:focus, #admin-login button:hover, #admin-login button:focus, #project-form button:hover, #project-form button:focus, .contato-form button:hover, .contato-form button:focus {
+  background: linear-gradient(90deg, #23232a 0%, #4b4bff 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 32px #4b4bff33, 0 2px 8px #23232a33;
+}
+.projetos-section h2, .home-section h1, .contato-section h2, .admin-section h2 {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  text-fill-color: initial !important;
+  color: #fff !important;
+  transition: none !important;
+}
+.sobre-section h2 {
+  background: linear-gradient(90deg, #4b4bff 0%, #23232a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  transition: background 0.3s;
+}
+.sobre-section h2:hover {
+  background: linear-gradient(90deg, #23232a 0%, #4b4bff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+} 
+
+/* Remover estilos de parallax-bg e parallax-shape */ 
+
+ 

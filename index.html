@@ -20,7 +20,6 @@
         <li><a href="#home" class="active">Início</a></li>
         <li><a href="#projetos">Projetos</a></li>
         <li><a href="#contato">Contato</a></li>
-        <li><a href="#admin">Admin</a></li>
       </ul>
     </nav>
   </header>
@@ -161,49 +160,55 @@
         <button type="submit">Enviar mensagem</button>
       </form>
     </section>
-    <section id="admin" class="section admin-section">
-      <h2>Admin</h2>
-      <div id="admin-login">
-        <input type="password" id="admin-password" placeholder="Senha de acesso">
-        <button onclick="loginAdmin()">Entrar</button>
+    
+    <!-- Bolinha flutuante admin (oculta) -->
+    <div id="admin-floating" class="admin-floating" onclick="toggleAdminPanel()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/>
+      </svg>
+    </div>
+    
+    <!-- Painel admin flutuante -->
+    <div id="admin-panel-floating" class="admin-panel-floating" style="display:none;">
+      <div class="admin-panel-header">
+        <h3>Nexure</h3>
+        <button onclick="closeAdminPanel()" class="admin-close-btn">×</button>
       </div>
-      <div id="admin-panel" style="display:none;">
-        <button id="admin-logout" style="margin-bottom:24px;align-self:flex-end;background:#23232a;color:#fff;border:none;border-radius:8px;padding:8px 22px;font-weight:700;cursor:pointer;transition:background 0.2s;">Sair do Admin</button>
-        <h3>Adicionar novo projeto</h3>
-        <form id="project-form">
-          <input type="text" id="project-name" placeholder="Nome do projeto" required>
-          <textarea id="project-desc" placeholder="Descrição curta" required></textarea>
-          <input type="file" id="project-images" accept="image/jpeg, image/png" multiple required>
-          <button type="submit">Adicionar Projeto</button>
+      
+      <div id="admin-login-floating">
+        <input type="password" id="admin-password-floating" placeholder="Acesso" style="width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#1a1a1a;color:#fff;margin-bottom:10px;">
+        <button onclick="loginAdminFloating()" style="width:100%;background:#4b4bff;color:#fff;border:none;border-radius:6px;padding:8px;cursor:pointer;font-weight:600;">Entrar</button>
+      </div>
+      
+      <div id="admin-content-floating" style="display:none;">
+        <button id="admin-logout-floating" style="width:100%;background:#23232a;color:#fff;border:none;border-radius:6px;padding:8px;margin-bottom:16px;cursor:pointer;font-weight:600;">Sair do Admin</button>
+        
+        <h4>Adicionar novo projeto</h4>
+        <form id="project-form-floating">
+          <input type="text" id="project-name-floating" placeholder="Nome do projeto" required style="width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#1a1a1a;color:#fff;margin-bottom:8px;">
+          <textarea id="project-desc-floating" placeholder="Descrição curta" required style="width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#1a1a1a;color:#fff;margin-bottom:8px;resize:vertical;min-height:60px;"></textarea>
+          <input type="file" id="project-images-floating" accept="image/jpeg, image/png" multiple required style="width:100%;margin-bottom:8px;">
+          <button type="submit" style="width:100%;background:#4b4bff;color:#fff;border:none;border-radius:6px;padding:8px;cursor:pointer;font-weight:600;">Adicionar Projeto</button>
         </form>
-        <h3 style="margin-top:36px;">Editar contatos do site</h3>
-        <form id="contato-form-admin" style="max-width:400px;margin:24px auto 0 auto;display:flex;flex-direction:column;gap:18px;">
-          <label style="display:flex;align-items:center;gap:10px;">
-            <span style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;">
-              <svg width="20" height="20" fill="none" stroke="#4b4bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
-            </span>
-            <input type="email" id="admin-email" placeholder="Email de contato" value="nexureservicos@gmail.com" required style="flex:1;">
-          </label>
-          <label style="display:flex;align-items:center;gap:10px;">
-            <span style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;">
-              <svg width="20" height="20" fill="none" stroke="#4b4bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><circle cx="12" cy="12" r="3.5"/><circle cx="18" cy="6" r="1"/></svg>
-            </span>
-            <input type="text" id="admin-instagram" placeholder="Instagram" value="@nexure.team" required style="flex:1;">
-          </label>
-          <label style="display:flex;align-items:center;gap:10px;">
-            <span style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;">
-              <svg width="20" height="20" fill="none" stroke="#4b4bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01"/><path d="M18 10h.01"/><path d="M12 14h.01"/></svg>
-            </span>
-            <input type="text" id="admin-whatsapp" placeholder="WhatsApp (opcional)" style="flex:1;">
-          </label>
-          <button type="submit">Salvar Contatos</button>
+        
+        <h4 style="margin-top:20px;">Editar contatos</h4>
+        <form id="contato-form-admin-floating">
+          <input type="email" id="admin-email-floating" placeholder="Email de contato" value="nexureservicos@gmail.com" required style="width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#1a1a1a;color:#fff;margin-bottom:8px;">
+          <input type="text" id="admin-instagram-floating" placeholder="Instagram" value="@nexure.team" required style="width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#1a1a1a;color:#fff;margin-bottom:8px;">
+          <input type="text" id="admin-whatsapp-floating" placeholder="WhatsApp (opcional)" style="width:100%;padding:8px;border-radius:6px;border:1px solid #333;background:#1a1a1a;color:#fff;margin-bottom:8px;">
+          <button type="submit" style="width:100%;background:#4b4bff;color:#fff;border:none;border-radius:6px;padding:8px;cursor:pointer;font-weight:600;">Salvar Contatos</button>
         </form>
       </div>
-    </section>
+    </div>
   </main>
   <footer class="footer">
     <p>&copy; 2025 Nexure. Todos os direitos reservados.</p>
   </footer>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <script src="firebase-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html> 
